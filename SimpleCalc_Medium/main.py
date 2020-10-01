@@ -3,9 +3,9 @@ from decimal import Decimal
 
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
-qtCreatorFile = "basicCalc.ui" # Enter file here.
+pyQTfileName = "simpleCalc.ui" 
 
-Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
+Ui_MainWindow, QtBaseClass = uic.loadUiType(pyQTfileName)
 
 class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -15,7 +15,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.addNumbers.clicked.connect(self.add)
         self.subNumbers.clicked.connect(self.sub)
         self.mulNumbers.clicked.connect(self.mul)
-        self.divNumbers.clicked.connect(self.mul)
+        self.divNumbers.clicked.connect(self.div)
 
 
     def add(self):

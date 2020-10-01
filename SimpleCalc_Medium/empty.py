@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
-pyQTfileName = "basicCalc.ui" # Enter file here.
+pyQTfileName = "simpleCalc.ui"
 
 Ui_MainWindow, QtBaseClass = uic.loadUiType(pyQTfileName)
 
