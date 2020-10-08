@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import (QMainWindow, QTextEdit,QAction, QFileDialog, QAppli
 from PyQt5.QtGui import QIcon
 import sys
 from pathlib import Path
+import comtypes.client
+import os
 
 
 pyQTfileName = "fileBrowser.ui" 
@@ -26,6 +28,16 @@ class Example(QtWidgets.QMainWindow, Ui_MainWindow):
         #openFile.setShortcut('Ctrl+O')
         #openFile.setStatusTip('Open new File')
         #openFile.triggered.connect(self.showDialog)
+        self.log.setText("Steps:")
+        self.log.append("1. Select the files you want to convert")
+        self.log.append("2. Enter the name for the output file")
+        self.log.append("3. Select the destination folder")
+        self.log.append("4. Select the operation you want to perform")
+        self.log.append("(WARNING: Make sure you select correct file format else the program will exit)")
+        self.log.append("5. Click on Convert and Save")
+        self.log.append("Update Log:")
+
+        
         self.browseButton.clicked.connect(self.showDialog)
         self.outputFolderBrowse.clicked.connect(self.outputFolder)
         self.convert.clicked.connect(self.check)
@@ -49,6 +61,10 @@ class Example(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             self.filePath.setText(str(len(fname[0]))+" files selected")
         self.inputFiles = fname[0]
+        self.log.append("Following files selected")
+        for i in fname[0]:
+            self.log.append(i) 
+        #self.log.setText(fname[0])
         #self.convert.clicked.connect(self.check)
 
     def outputFolder(self):
@@ -57,24 +73,67 @@ class Example(QtWidgets.QMainWindow, Ui_MainWindow):
         fname=QFileDialog.getExistingDirectory(self,"Choose Directory")
         #fname = QFileDialog.getOpenFileNames(self, 'Open file', home_dir)
         print(fname)
-        outputFileName = str(self.outputFileNameBox.toPlainText())
-        print(outputFileName)
-        outputPath = fname
-        print(outputPath)
-        self.outputFile = str(outputPath)+"/"+str(outputFileName)+".pdf"
-        print(self.outputFile)
+        self.log.append("Following folder path has been selected")
+        self.log.append(fname)
+        self.outputFileName = str(self.outputFileNameBox.toPlainText())
+        print(self.outputFileName)
+        self.outputPath = fname
+        print(self.outputPath)
+        
+        
         #self.convert.clicked.connect(self.check)
 
     def check(self):
-        if self.image2pdf.isChecked(): 
-            self.img2pdf()
+        if self.pptx2pdfO2O.isChecked():
+            self.pptxtopdfO2O()
+        elif self.docx2pdfO2O.isChecked():
+            self.docxtopdfO2O()
+
+        elif self.pdf2imgO2M.isChecked():
+            self.pdftoimgO2M()
+
+        elif self.img2pdfM2O.isChecked(): 
+            self.imgtopdfM2O()
+        elif self.pdf2pdfM2O.isChecked():
+            self.pdftopdfM2O()
             
-    def img2pdf(self):
+        elif self.image2pdfM2M.isChecked():
+            self.imagetopdfM2M()
+        elif self.pptx2pdfM2M.isChecked():
+            self.pptxtopdfM2M()
+        elif self.docx2pdfM2M.isChecked():
+            self.docxtopdfM2M()
+        
+    #def pptxtopdfO2O(self):
+        powerpoint = comtypes.client.CreateObject("Powerpoint.Application")
+        powerpoint.Visible = 1
+        if outputFileName[-3:] != 'pdf':
+            outputFileName = outputFileName + ".pdf"
+        deck = powerpoint.Presentations.Open(inputFileName)
+        deck.SaveAs(outputFileName, formatType) # formatType = 32 for ppt to pdf
+        deck.Close()
+
+    def docxtopdfO2O(self):
+        from docx2pdf import convert
+        try:
+            outputFile = str(self.outputPath)+"/"+str(self.outputFileName)+".pdf"
+            convert(self.inputFiles[0], outputFile)
+            self.log.append("Succesfully converted to")
+            self.log.append(outputFile)
+            print("converted")
+        except AttributeError:
+            self.log.append("Succesfully converted to")
+            self.log.append(outputFile)
+            pass
+
+    def imgtopdfM2O(self):
         import img2pdf
-        print(self.outputFile)
-        with open(self.outputFile,"wb") as f:
+        outputFile = str(self.outputPath)+"/"+str(self.outputFileName)+".pdf"
+        print(outputFile)
+        with open(outputFile,"wb") as f:
 	        f.write(img2pdf.convert(self.inputFiles))
-            
+        self.log.append("Succesfully converted to")
+        self.log.append(outputFile)
         print("converted")
 
         

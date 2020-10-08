@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
-    <height>617</height>
+    <width>1006</width>
+    <height>799</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QToolButton" name="browseButton">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>221</y>
+      <x>440</x>
+      <y>176</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QTextEdit" name="filePath">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>220</y>
+      <x>50</x>
+      <y>175</y>
       <width>371</width>
       <height>31</height>
      </rect>
@@ -40,8 +40,8 @@
    <widget class="QPushButton" name="convert">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>470</y>
+      <x>370</x>
+      <y>700</y>
       <width>211</width>
       <height>31</height>
      </rect>
@@ -50,39 +50,11 @@
      <string>Convert and Save</string>
     </property>
    </widget>
-   <widget class="QSplitter" name="splitter">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>90</y>
-      <width>621</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <widget class="QRadioButton" name="image2pdf">
-     <property name="text">
-      <string>Image2pdf</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="word2pdf">
-     <property name="text">
-      <string>word2pdf</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="pptx2pdf">
-     <property name="text">
-      <string>pptx2pdf</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>185</y>
+      <x>50</x>
+      <y>140</y>
       <width>101</width>
       <height>21</height>
      </rect>
@@ -94,8 +66,8 @@
    <widget class="QTextEdit" name="outputFileNameBox">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>360</y>
+      <x>50</x>
+      <y>300</y>
       <width>371</width>
       <height>31</height>
      </rect>
@@ -104,21 +76,21 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>330</y>
-      <width>101</width>
+      <x>50</x>
+      <y>270</y>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Output file name</string>
+     <string>Enter name of output files</string>
     </property>
    </widget>
    <widget class="QToolButton" name="outputFolderBrowse">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>360</y>
+      <x>440</x>
+      <y>300</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -126,6 +98,112 @@
     <property name="text">
      <string>Output Folder</string>
     </property>
+   </widget>
+   <widget class="QTextEdit" name="log">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>60</y>
+      <width>391</width>
+      <height>381</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>480</y>
+      <width>881</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="3">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Many to Many</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QRadioButton" name="pptx2pdfO2O">
+       <property name="text">
+        <string>pptx2pdf</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QRadioButton" name="docx2pdfM2M">
+       <property name="text">
+        <string>docx2pdf</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QRadioButton" name="img2pdfM2O">
+       <property name="text">
+        <string>Img2pdf</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>One To Many</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Many to One</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>One To One</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QRadioButton" name="pdf2pdfM2O">
+       <property name="text">
+        <string>pdf2pdf</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QRadioButton" name="image2pdfM2M">
+       <property name="text">
+        <string>Img2pdf</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QRadioButton" name="docx2pdfO2O">
+       <property name="text">
+        <string>docx2pdf</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QRadioButton" name="pptx2pdfM2M">
+       <property name="text">
+        <string>pptx2pdf</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QRadioButton" name="pdf2imgO2M">
+       <property name="text">
+        <string>pdf2img</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
