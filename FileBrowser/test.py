@@ -3,8 +3,14 @@ from PyQt5.QtWidgets import (QMainWindow, QTextEdit,QAction, QFileDialog, QAppli
 from PyQt5.QtGui import QIcon
 import sys
 from pathlib import Path
-import comtypes.client
+import win32com.client
 import os
+from pdf2image import convert_from_path
+from pdf2image.exceptions import (
+ PDFInfoNotInstalledError,
+ PDFPageCountError,
+ PDFSyntaxError
+)
 
 
 pyQTfileName = "fileBrowser.ui" 
@@ -105,13 +111,17 @@ class Example(QtWidgets.QMainWindow, Ui_MainWindow):
             self.docxtopdfM2M()
         
     #def pptxtopdfO2O(self):
-        powerpoint = comtypes.client.CreateObject("Powerpoint.Application")
-        powerpoint.Visible = 1
-        if outputFileName[-3:] != 'pdf':
-            outputFileName = outputFileName + ".pdf"
-        deck = powerpoint.Presentations.Open(inputFileName)
-        deck.SaveAs(outputFileName, formatType) # formatType = 32 for ppt to pdf
-        deck.Close()
+    #    powerpoint = win32com.client.DispatchEx("Powerpoint.Application")
+    #    powerpoint.Visible = 1
+    #    outputFileName = str(self.outputPath)+"/"+str(self.outputFileName)+".pdf"
+    #    deck = powerpoint.Presentations.Open(self.inputFiles[0])
+    #    deck.SaveAs(outputFileName, 32) # formatType = 32 for ppt to pdf
+    #    deck.Close()
+    #    self.log.append("Succesfully converted to")
+    #    self.log.append(outputFileName)
+    #    powerpoint.Quit()
+
+
 
     def docxtopdfO2O(self):
         from docx2pdf import convert
@@ -125,6 +135,14 @@ class Example(QtWidgets.QMainWindow, Ui_MainWindow):
             self.log.append("Succesfully converted to")
             self.log.append(outputFile)
             pass
+
+    def pdftoimgO2M(self):
+        print('........................................................',self.inputFiles[0])
+        images = convert_from_path(self.inputFiles[0],500)
+        for i, image in enumerate(images):
+            fname = "image" + str(i) + ".png"
+            image.save(fname, "PNG")
+
 
     def imgtopdfM2O(self):
         import img2pdf
